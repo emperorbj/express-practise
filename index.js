@@ -6,7 +6,7 @@ app.get('/products',(request,response)=>{
     console.log('get request incoming')
     response.send({message:'get request is a huge success'})
 })
-
+// Making a get request based on an id
 app.get('/products/:id',(request,response)=>{
     console.log(request.params.id)
     response.send({message:'successfully used id to fetch data'})
