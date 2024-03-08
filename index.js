@@ -64,6 +64,36 @@ let newProfiles =[
 },
 
 ]
+
+profileModel.create(newProfiles)
+.then(()=>{
+    console.log('successfully inserted')
+})
+.catch((err)=>{
+    console.log(err)
+})
+
+// profileModel.find({jobTitle:'developer'})
+// .then((data)=>{
+//     console.log(data)
+// })
+// .catch((err)=>{
+//     console.log(err)
+// })
+
+
+
+app.post('/products',(request,response)=>{
+    console.log(request.body)
+    profileModel.create(request.body)
+    .then((document)=>{
+        response.send({data:document})
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+    
+})
 // Making a get request with no query parameters
 app.get('/products',(request,response)=>{
     console.log('get request incoming')
