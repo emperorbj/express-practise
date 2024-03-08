@@ -1,6 +1,4 @@
-const express = require('express')
 
-const app = express()
 // Making a get request with no query parameters
 app.get('/products',(request,response)=>{
     console.log('get request incoming')
