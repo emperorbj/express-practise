@@ -30,6 +30,40 @@ let profileSchema = mongoose.Schema({
     }
 
 },{timestamps:true})
+
+
+
+const profileModel = mongoose.model('profiles',profileSchema)
+
+
+let newProfiles =[
+{
+    name:'Bernard',
+    age:25,
+    jobTitle:'manager'
+},
+{
+    name:'Lawrence',
+    age:25,
+    jobTitle:'developer'
+},
+{
+    name:'Grant',
+    age:26,
+    jobTitle:'tester',
+},
+{
+    name:'mistake',
+    age:25,
+    jobTitle:'Dev Ops',
+},
+{
+    name:'Bad mistake',
+    age:25,
+    salary:65883
+},
+
+]
 // Making a get request with no query parameters
 app.get('/products',(request,response)=>{
     console.log('get request incoming')
