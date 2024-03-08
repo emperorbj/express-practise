@@ -1,4 +1,35 @@
+const express = require('express')
 
+const app = express()
+
+app.use(express.json())
+
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost:27017/new')
+.then((data)=>{
+    console.log('succesfully connected')
+})
+.catch((err)=>{
+    console.log(err)
+})
+
+let profileSchema = mongoose.Schema({
+    name:{
+        type:String,
+        required:[true,'name is required']
+    },
+
+    age:{
+        type:Number,
+        required:[true,'age is a requirement']
+    },
+
+    jobTitle:{
+        type:String,
+        enums:['manager','developer','tester']
+    }
+
+},{timestamps:true})
 // Making a get request with no query parameters
 app.get('/products',(request,response)=>{
     console.log('get request incoming')
