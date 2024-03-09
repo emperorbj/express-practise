@@ -33,7 +33,29 @@ const userSchema = mongoose.Schema({
 
 const userModel = mongoose.model('users',userSchema)
 
+app.post('/register',(request,response)=>{
+    let user = request.body
 
+    bcrypt.genSalt(10,(err,salt)=>{
+        if(!err)
+        {
+            bcrypt.hash(user.password,salt,(err,hpass)=>{
+                if(!err)
+                {
+                    user.password = hpass
+                    userModel.create(user)
+                    .then(()=>{
+                        response.send({message:'user post was sent'})
+                    })
+                    .catch((err)=>{
+                        console.log(err)
+                    })
+                }
+            })
+        }
+    })
+    
+})
 
 
 
