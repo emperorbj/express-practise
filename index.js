@@ -13,6 +13,34 @@ mongoose.connect('mongodb://localhost:27017/new')
     console.log(err)
 })
 
+
+//  / / / /USERS / / / / / / / / / /USERS / / / / / / / / // / / / / / / / / /  / / / / / / // / / /  //  /
+
+const userSchema = mongoose.Schema({
+    name:{
+        type:String,
+        required:[true,'name is required']
+    },
+    email:{
+        type:String,
+        required:[true,'email is required']
+    },
+    password:{
+        type:String,
+        required:[true,'password is required']
+    }
+},{timestamps:true})
+
+
+
+
+
+
+
+
+
+
+
 let profileSchema = mongoose.Schema({
     name:{
         type:String,
