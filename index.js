@@ -96,7 +96,15 @@ app.post('/login',(request,response)=>{
     console.log(err)
     })
 })
-    
+
+
+// USING A MIDDLEWARE TO VERIFY IF USER HAS A WEBTOKEN BEFORE ACCESS CAN BE GIVEN TO THEM
+// TOKEN ARE SENT VIA HEADERS
+
+app.get('/getdata',verifyToken,(request,response)=>{
+
+    response.send({message:'access granted because of token'})
+})
 
 
 
