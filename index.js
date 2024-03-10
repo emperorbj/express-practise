@@ -105,6 +105,25 @@ app.get('/getdata',verifyToken,(request,response)=>{
 
     response.send({message:'access granted because of token'})
 })
+function verifyToken(request,response,next){
+    // split(" ") split the value by space and creates an array where "Bearer" and "token value are members"
+    // adding the [1] extracts the token key from th array
+    console.log(request.headers.authorization.split(" ")[1])
+    let Token = request.headers.authorization.split(" ")[1];
+    jwt.verify(Token,'privateKey',(err,data)=>{
+        if(!err)
+        {
+            console.log(data)
+            next()
+        }
+
+        else
+        {
+            response.status(401).send({message:'valid token required'})
+        }
+    })
+    // response.send({message:'middleware working'})
+}
 
 
 
