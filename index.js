@@ -60,6 +60,41 @@ app.post('/register',(request,response)=>{
 // END POINT FOR LOGIN
 app.post('/login',(request,response)=>{
     let validUser = request.body
+
+    userModel.findOne({email:validUser.email})
+    .then((user)=>{
+        if(user!==null)
+        {
+            bcrypt.compare(validUser.password,user.password,(err,result)=>{
+                if(result===true)
+                {
+                    // response.send({message:'password valid'})
+
+                    // GENERATE A TOKEN AND SEND IT TO THE CLIENT SIDE
+                    jwt.sign({email:validUser.emali},'privateKey',(err,token)=>{
+                        if(!err)
+                        {
+                            response.send({webToken:token})
+                        }
+                        else
+                        {
+                            response.send({message:'problem creating token'})
+                        }
+                    })
+                }
+                else
+                {
+                    response.send({message:'password invalid'})
+                }
+            })
+        }
+        else{
+            response.send({message:'user not found'})
+        }
+    })
+    .catch((err)=>{
+    console.log(err)
+    })
 })
     
 
